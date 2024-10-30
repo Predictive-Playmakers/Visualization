@@ -11,18 +11,20 @@ interface Team {
 
 interface TeamCardProps {
   team: Team | null;
-  roundName: string;
+  roundName: RoundName;
   index: number;
-  onDragStart: (e: React.DragEvent<HTMLDivElement>, team: Team, roundName: string, index: number) => void;
+  onDragStart: (
+    e: React.DragEvent<HTMLDivElement>,
+    team: Team,
+    roundName: RoundName,
+    index: number
+  ) => void;
   onDragEnd: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
-const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'outline' }> = ({
-  children,
-  className = '',
-  variant,
-  ...props
-}) => {
+const Button: React.FC<
+  React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'outline' }
+> = ({ children, className = '', variant, ...props }) => {
   return (
     <button
       className={`px-3 py-1 rounded-md text-sm font-medium ${
@@ -52,7 +54,13 @@ const Card: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   );
 };
 
-const TeamCard: React.FC<TeamCardProps> = ({ team, roundName, index, onDragStart, onDragEnd }) => {
+const TeamCard: React.FC<TeamCardProps> = ({
+  team,
+  roundName,
+  index,
+  onDragStart,
+  onDragEnd,
+}) => {
   return (
     <div
       id={`${roundName}-${index}`}
@@ -88,11 +96,11 @@ const TeamCard: React.FC<TeamCardProps> = ({ team, roundName, index, onDragStart
 
 interface MatchupProps {
   teams: (Team | null)[];
-  roundName: string;
+  roundName: RoundName;
   onDragStart: (
     e: React.DragEvent<HTMLDivElement>,
     team: Team,
-    roundName: string,
+    roundName: RoundName,
     index: number
   ) => void;
   onDragEnd: (e: React.DragEvent<HTMLDivElement>) => void;
@@ -125,18 +133,22 @@ const Matchup: React.FC<MatchupProps> = ({
 };
 
 interface RoundProps {
-  roundName: string;
+  roundName: RoundName;
   teams: (Team | null)[];
   isRight: boolean;
   offset: number;
   onDragStart: (
     e: React.DragEvent<HTMLDivElement>,
     team: Team,
-    roundName: string,
+    roundName: RoundName,
     index: number
   ) => void;
   onDragEnd: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDrop: (e: React.DragEvent<HTMLDivElement>, roundName: string, index: number) => void;
+  onDrop: (
+    e: React.DragEvent<HTMLDivElement>,
+    roundName: RoundName,
+    index: number
+  ) => void;
 }
 
 const Round: React.FC<RoundProps> = ({
@@ -163,7 +175,9 @@ const Round: React.FC<RoundProps> = ({
   };
 
   return (
-    <div className={`flex flex-col ${isRight ? 'items-end' : 'items-start'} gap-8`}>
+    <div
+      className={`flex flex-col ${isRight ? 'items-end' : 'items-start'} gap-8`}
+    >
       {pairs.map((pair, idx) => (
         <div
           key={idx}
@@ -186,25 +200,127 @@ const Round: React.FC<RoundProps> = ({
   );
 };
 
+// Define the RoundName type
+type RoundName = 'round1' | 'round2' | 'round3' | 'round4' | 'final';
+
+// Define the Rounds type using RoundName
+type Rounds = Record<RoundName, (Team | null)[]>;
+
 const TournamentBracket: React.FC = () => {
-  const [rounds, setRounds] = useState({
+  const [rounds, setRounds] = useState<Rounds>({
     round1: [
-      { id: 'EAST-1', name: 'UConn', seed: 1, conference: 1, scores: { round1: 91 } },
-      { id: 'EAST-16', name: 'Stetson', seed: 16, conference: 1, scores: { round1: 52 } },
-      { id: 'EAST-8', name: 'FAU', seed: 8, conference: 1, scores: { round1: 65 } },
-      { id: 'EAST-9', name: 'Northwestern', seed: 9, conference: 1, scores: { round1: 77 } },
-      { id: 'EAST-5', name: 'San Diego St', seed: 5, conference: 1, scores: { round1: 69 } },
-      { id: 'EAST-12', name: 'UAB', seed: 12, conference: 1, scores: { round1: 65 } },
-      { id: 'EAST-4', name: 'Auburn', seed: 4, conference: 1, scores: { round1: 76 } },
-      { id: 'EAST-13', name: 'Yale', seed: 13, conference: 1, scores: { round1: 78 } },
-      { id: 'WEST-1', name: 'North Carolina', seed: 1, conference: 2, scores: { round1: 90 } },
-      { id: 'WEST-16', name: 'Wagner', seed: 16, conference: 2, scores: { round1: 62 } },
-      { id: 'WEST-8', name: 'Mississippi St', seed: 8, conference: 2, scores: { round1: 51 } },
-      { id: 'WEST-9', name: 'Michigan St', seed: 9, conference: 2, scores: { round1: 69 } },
-      { id: 'WEST-5', name: 'Saint Mary\'s', seed: 5, conference: 2, scores: { round1: 66 } },
-      { id: 'WEST-12', name: 'Grand Canyon', seed: 12, conference: 2, scores: { round1: 75 } },
-      { id: 'WEST-4', name: 'Alabama', seed: 4, conference: 2, scores: { round1: 109 } },
-      { id: 'WEST-13', name: 'New Mexico', seed: 13, conference: 2, scores: { round1: 56 } },
+      {
+        id: 'EAST-1',
+        name: 'UConn',
+        seed: 1,
+        conference: 1,
+        scores: { round1: 91 },
+      },
+      {
+        id: 'EAST-16',
+        name: 'Stetson',
+        seed: 16,
+        conference: 1,
+        scores: { round1: 52 },
+      },
+      {
+        id: 'EAST-8',
+        name: 'FAU',
+        seed: 8,
+        conference: 1,
+        scores: { round1: 65 },
+      },
+      {
+        id: 'EAST-9',
+        name: 'Northwestern',
+        seed: 9,
+        conference: 1,
+        scores: { round1: 77 },
+      },
+      {
+        id: 'EAST-5',
+        name: 'San Diego St',
+        seed: 5,
+        conference: 1,
+        scores: { round1: 69 },
+      },
+      {
+        id: 'EAST-12',
+        name: 'UAB',
+        seed: 12,
+        conference: 1,
+        scores: { round1: 65 },
+      },
+      {
+        id: 'EAST-4',
+        name: 'Auburn',
+        seed: 4,
+        conference: 1,
+        scores: { round1: 76 },
+      },
+      {
+        id: 'EAST-13',
+        name: 'Yale',
+        seed: 13,
+        conference: 1,
+        scores: { round1: 78 },
+      },
+      {
+        id: 'WEST-1',
+        name: 'North Carolina',
+        seed: 1,
+        conference: 2,
+        scores: { round1: 90 },
+      },
+      {
+        id: 'WEST-16',
+        name: 'Wagner',
+        seed: 16,
+        conference: 2,
+        scores: { round1: 62 },
+      },
+      {
+        id: 'WEST-8',
+        name: 'Mississippi St',
+        seed: 8,
+        conference: 2,
+        scores: { round1: 51 },
+      },
+      {
+        id: 'WEST-9',
+        name: 'Michigan St',
+        seed: 9,
+        conference: 2,
+        scores: { round1: 69 },
+      },
+      {
+        id: 'WEST-5',
+        name: "Saint Mary's",
+        seed: 5,
+        conference: 2,
+        scores: { round1: 66 },
+      },
+      {
+        id: 'WEST-12',
+        name: 'Grand Canyon',
+        seed: 12,
+        conference: 2,
+        scores: { round1: 75 },
+      },
+      {
+        id: 'WEST-4',
+        name: 'Alabama',
+        seed: 4,
+        conference: 2,
+        scores: { round1: 109 },
+      },
+      {
+        id: 'WEST-13',
+        name: 'New Mexico',
+        seed: 13,
+        conference: 2,
+        scores: { round1: 56 },
+      },
     ],
     round2: Array(8).fill(null),
     round3: Array(4).fill(null),
@@ -215,7 +331,7 @@ const TournamentBracket: React.FC = () => {
   const handleDragStart = (
     e: React.DragEvent<HTMLDivElement>,
     team: Team,
-    roundName: string,
+    roundName: RoundName,
     index: number
   ) => {
     e.dataTransfer.setData(
@@ -235,7 +351,7 @@ const TournamentBracket: React.FC = () => {
 
   const handleDrop = (
     e: React.DragEvent<HTMLDivElement>,
-    targetRound: string,
+    targetRound: RoundName,
     targetIndex: number
   ) => {
     e.preventDefault();
@@ -243,7 +359,11 @@ const TournamentBracket: React.FC = () => {
 
     try {
       const data = JSON.parse(e.dataTransfer.getData('application/json'));
-      const { team, sourceRound, sourceIndex } = data;
+      const { team, sourceRound, sourceIndex } = data as {
+        team: Team;
+        sourceRound: RoundName;
+        sourceIndex: number;
+      };
 
       if (sourceRound === targetRound && sourceIndex === targetIndex) return;
 
@@ -302,7 +422,9 @@ const TournamentBracket: React.FC = () => {
       <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 flex justify-between items-center">
           <div className="space-y-1">
-            <h2 className="text-2xl font-bold text-gray-900">Tournament Bracket</h2>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Tournament Bracket
+            </h2>
             <p className="text-sm text-gray-500">Drag teams to advance them</p>
           </div>
           <div className="flex space-x-4">
@@ -320,11 +442,14 @@ const TournamentBracket: React.FC = () => {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 overflow-x-auto">
           <div className="flex justify-center min-w-[1200px] gap-16">
             <div className="flex gap-16">
-              {['round1', 'round2'].map((roundName, idx) => (
+              {(['round1', 'round2'] as RoundName[]).map((roundName) => (
                 <Round
                   key={roundName}
                   roundName={roundName}
-                  teams={rounds[roundName].slice(0, rounds[roundName].length / 2)}
+                  teams={rounds[roundName].slice(
+                    0,
+                    rounds[roundName].length / 2
+                  )}
                   isRight={false}
                   offset={0}
                   onDragStart={handleDragStart}
@@ -348,11 +473,13 @@ const TournamentBracket: React.FC = () => {
             </div>
 
             <div className="flex gap-16">
-              {['round2', 'round1'].map((roundName, idx) => (
+              {(['round2', 'round1'] as RoundName[]).map((roundName) => (
                 <Round
                   key={roundName}
                   roundName={roundName}
-                  teams={rounds[roundName].slice(rounds[roundName].length / 2)}
+                  teams={rounds[roundName].slice(
+                    rounds[roundName].length / 2
+                  )}
                   isRight={true}
                   offset={rounds[roundName].length / 2}
                   onDragStart={handleDragStart}
