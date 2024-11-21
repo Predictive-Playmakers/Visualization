@@ -62,7 +62,7 @@ const FinalMatches = ({ data }) => {
       </svg>
 
       <div className="absolute left-12 -top-0">
-        <MatchBox title="Semifinal 1" teams={data.semifinals[0].teams} />
+        <MatchBox title="Final Four" teams={data.semifinals[0].teams} />
       </div>
 
       <div className="absolute left-1/2 -translate-x-1/2 top-24 scale-[110%]">
@@ -74,7 +74,7 @@ const FinalMatches = ({ data }) => {
       </div>
 
       <div className="absolute right-12 -top-0">
-        <MatchBox title="Semifinal 2" teams={data.semifinals[1].teams} />
+        <MatchBox title="Final Four" teams={data.semifinals[1].teams} />
       </div>
     </div>
   );

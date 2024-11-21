@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Trophy, Sparkles as Wand } from "lucide-react";
+import { Trophy, Sparkles as Wand, RotateCcw, ChartNoAxesCombined   } from "lucide-react";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-
+import Plot from "react-plotly.js";
 import BracketGroup from "./components/BracketGroup";
 import FinalMatches from "./components/FinalMatches";
 import StatisticsModal from "@/components/StatisticsModal";
@@ -10,9 +10,11 @@ import TeamPreview from "@/components/TeamPreview";
 
 import { calculateBracketDimensions } from "./utils/bracketCalculations";
 import { generateDummyBracket, predictWinner } from "./utils";
+import startingBracketData from './utils/startingData.json';
+
 
 const TournamentLayout = () => {
-  const [bracketData, setBracketData] = useState(generateDummyBracket(4));
+  const [bracketData, setBracketData] = useState(startingBracketData);
   const dimensions = calculateBracketDimensions(16);
   const bracketWidth = dimensions.width / 2 + 50;
   const bracketHeight = dimensions.height - 50;
@@ -20,16 +22,30 @@ const TournamentLayout = () => {
   const [activeTeam, setActiveTeam] = useState(null);
   const [isPredicted, setIsPredicted] = useState(false);
 
-  console.log(bracketData);
+  const dummyShapData = {
+    featureNames: ["sex", "age", "Pclass", "SibSp", "Parch"],
+    features: {
+      "0": { effect: 0.18, value: "female" },
+      "1": { effect: 0.08, value: 29 },
+      "2": { effect: 0.12, value: 1 },
+      "3": { effect: -0.03, value: 0 },
+      "4": { effect: -0.01, value: 2 },
+    },
+    baseValue: 0.356,
+    outValue: 0.690,
+  };
 
+
+  console.log(bracketData);
+ 
   const handleDragStart = (event) => {
-    if (isPredicted) return;
+    // if (isPredicted) return;
     console.log("Drag start:", event.active.data.current);
     setActiveTeam(event.active.data.current.team);
   };
 
   const handleDragEnd = (event) => {
-    if (isPredicted) return;
+    // if (isPredicted) return;
     const { active, over } = event;
     console.log("Drag end:", { active, over });
 
@@ -113,6 +129,11 @@ const TournamentLayout = () => {
     setActiveTeam(null);
   };
 
+  const handleBracketReset = () => {
+    setIsPredicted(false);
+    setBracketData(startingBracketData)
+  };
+
   const handlePredictWinner = () => {
     setIsPredicted(true);
     setBracketData(predictWinner(bracketData));
@@ -124,7 +145,7 @@ const TournamentLayout = () => {
   const brackets = [
     {
       id: 1,
-      title: "Men's Division A",
+      title: "North",
       xOffset: 0,
       side: "left",
       data: bracketData.division0,
@@ -132,7 +153,7 @@ const TournamentLayout = () => {
     },
     {
       id: 2,
-      title: "Men's Division B",
+      title: "West",
       xOffset: 0,
       yOffset: bracketHeight + 50,
       side: "left",
@@ -141,7 +162,7 @@ const TournamentLayout = () => {
     },
     {
       id: 3,
-      title: "Women's Division A",
+      title: "East",
       xOffset: bracketWidth + 140,
       side: "right",
       data: bracketData.division2,
@@ -149,7 +170,7 @@ const TournamentLayout = () => {
     },
     {
       id: 4,
-      title: "Women's Division B",
+      title: "South",
       xOffset: bracketWidth + 140,
       yOffset: bracketHeight + 50,
       side: "right",
@@ -164,13 +185,20 @@ const TournamentLayout = () => {
         <div className="w-full px-[32px] 2xl:px-[36px] py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Trophy className="w-6 h-6 text-yellow-500" />
+              <ChartNoAxesCombined  className="w-6 h-6 text-yellow-500" />
               <h1 className="text-xl font-bold text-gray-800">
-                Tournament Brackets
+                Predictive Playmakers
               </h1>
             </div>
             <div className="flex gap-x-2">
-              {isPredicted ? (
+            <button
+                onClick={handleBracketReset}
+                className="flex items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-500"
+              >
+                <RotateCcw className="w-4 h-4 text-white mr-1.5" />
+                Reset Brackets
+              </button>
+              {isPredicted && (
                 <Dialog>
                   <DialogTrigger>
                     <button className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
@@ -179,15 +207,14 @@ const TournamentLayout = () => {
                   </DialogTrigger>
                   <StatisticsModal />
                 </Dialog>
-              ) : (
-                <button
-                  onClick={handlePredictWinner}
-                  className="flex items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-500"
-                >
-                  <Wand className="w-4 h-4 text-white mr-1.5" />
-                  Predict winner
-                </button>
               )}
+              <button
+                onClick={handlePredictWinner}
+                className="flex items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-500"
+              >
+                <Wand className="w-4 h-4 text-white mr-1.5" />
+                Predict winner
+              </button>
             </div>
           </div>
         </div>
@@ -195,7 +222,10 @@ const TournamentLayout = () => {
 
       <div className="">
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-          <main className="relative w-full overflow-y-hidden overflow-x-auto bg-gray-50 pt-16">
+          <main className="relative w-full overflow-y-hidden overflow-x-auto bg-gray-50 pt-16"style={{
+    overflow: "visible", // Allow hover box to appear outside
+    position: "relative", // Ensure stacking context for z-index
+  }}>
             <div
               className="absolute transform -translate-x-1/2 left-1/2"
               style={{
@@ -225,12 +255,14 @@ const TournamentLayout = () => {
                     data={bracket.data}
                     divisionId={bracket.divisionId}
                     activeTeam={activeTeam}
+                    shapData={dummyShapData}
+                    isPredicted={isPredicted}
+
                   />
                 </div>
               ))}
             </div>
           </main>
-
           <DragOverlay dropAnimation={null}>
             {activeTeam && <TeamPreview team={activeTeam} />}
           </DragOverlay>

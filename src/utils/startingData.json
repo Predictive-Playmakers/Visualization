@@ -1,0 +1,1055 @@
+{
+    "division0": {
+      "round0": [
+        {
+          "id": "0-0",
+          "teams": [
+            {
+              "name": "Connecticut",
+              "seed": 1,
+              "score": 0,
+              "group": "A"
+            },
+            {
+              "name": "Stetson",
+              "seed": 2,
+              "score": 0,
+              "group": "A"
+            }
+          ]
+        },
+        {
+          "id": "0-1",
+          "teams": [
+            {
+              "name": "FL Atlantic",
+              "seed": 3,
+              "score": 0,
+              "group": "A"
+            },
+            {
+              "name": "Northwestern",
+              "seed": 4,
+              "score": 0,
+              "group": "A"
+            }
+          ]
+        },
+        {
+          "id": "0-2",
+          "teams": [
+            {
+              "name": "San Diego St",
+              "seed": 5,
+              "score": 0,
+              "group": "A"
+            },
+            {
+              "name": "UAB",
+              "seed": 6,
+              "score": 0,
+              "group": "A"
+            }
+          ]
+        },
+        {
+          "id": "0-3",
+          "teams": [
+            {
+              "name": "Auburn",
+              "seed": 7,
+              "score": 0,
+              "group": "A"
+            },
+            {
+              "name": "Yale",
+              "seed": 8,
+              "score": 0,
+              "group": "A"
+            }
+          ]
+        },
+        {
+          "id": "0-4",
+          "teams": [
+            {
+              "name": "BYU",
+              "seed": 9,
+              "score": 0,
+              "group": "A"
+            },
+            {
+              "name": "Duquesne",
+              "seed": 10,
+              "score": 0,
+              "group": "A"
+            }
+          ]
+        },
+        {
+          "id": "0-5",
+          "teams": [
+            {
+              "name": "Illinois",
+              "seed": 11,
+              "score": 0,
+              "group": "A"
+            },
+            {
+              "name": "Morehead St",
+              "seed": 12,
+              "score": 0,
+              "group": "A"
+            }
+          ]
+        },
+        {
+          "id": "0-6",
+          "teams": [
+            {
+              "name": "Washington St",
+              "seed": 13,
+              "score": 0,
+              "group": "A"
+            },
+            {
+              "name": "Drake",
+              "seed": 14,
+              "score": 0,
+              "group": "A"
+            }
+          ]
+        },
+        {
+          "id": "0-7",
+          "teams": [
+            {
+              "name": "Iowa St",
+              "seed": 15,
+              "score": 0,
+              "group": "A"
+            },
+            {
+              "name": "S Dakota St",
+              "seed": 16,
+              "score": 0,
+              "group": "A"
+            }
+          ]
+        }
+      ],
+      "round1": [
+        {
+          "id": "1-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-1",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-2",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-3",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "round2": [
+        {
+          "id": "2-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "2-1",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "round3": [
+        {
+          "id": "3-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ]
+    },
+    "division1": {
+      "round0": [
+        {
+          "id": "0-0",
+          "teams": [
+            {
+              "name": "North Carolina",
+              "seed": 17,
+              "score": 0,
+              "group": "B"
+            },
+            {
+              "name": "Wagner",
+              "seed": 18,
+              "score": 0,
+              "group": "B"
+            }
+          ]
+        },
+        {
+          "id": "0-1",
+          "teams": [
+            {
+              "name": "Mississippi St",
+              "seed": 19,
+              "score": 0,
+              "group": "B"
+            },
+            {
+              "name": "Michigan St",
+              "seed": 20,
+              "score": 0,
+              "group": "B"
+            }
+          ]
+        },
+        {
+          "id": "0-2",
+          "teams": [
+            {
+              "name": "St Mary's CA",
+              "seed": 21,
+              "score": 0,
+              "group": "B"
+            },
+            {
+              "name": "Grand Canyon",
+              "seed": 22,
+              "score": 0,
+              "group": "B"
+            }
+          ]
+        },
+        {
+          "id": "0-3",
+          "teams": [
+            {
+              "name": "Clemson",
+              "seed": 23,
+              "score": 0,
+              "group": "B"
+            },
+            {
+              "name": "New Mexico",
+              "seed": 24,
+              "score": 0,
+              "group": "B"
+            }
+          ]
+        },
+        {
+          "id": "0-4",
+          "teams": [
+            {
+              "name": "Baylor",
+              "seed": 25,
+              "score": 0,
+              "group": "B"
+            },
+            {
+              "name": "Colgate",
+              "seed": 26,
+              "score": 0,
+              "group": "B"
+            }
+          ]
+        },
+        {
+          "id": "0-5",
+          "teams": [
+            {
+              "name": "Dayton",
+              "seed": 27,
+              "score": 0,
+              "group": "B"
+            },
+            {
+              "name": "Nevada",
+              "seed": 28,
+              "score": 0,
+              "group": "B"
+            }
+          ]
+        },
+        {
+          "id": "0-6",
+          "teams": [
+            {
+              "name": "Arizona",
+              "seed": 29,
+              "score": 0,
+              "group": "B"
+            },
+            {
+              "name": "Long Beach St",
+              "seed": 30,
+              "score": 0,
+              "group": "B"
+            }
+          ]
+        },
+        {
+          "id": "0-7",
+          "teams": [
+            {
+              "name": "Alabama",
+              "seed": 31,
+              "score": 0,
+              "group": "B"
+            },
+            {
+              "name": "Charleston So",
+              "seed": 32,
+              "score": 0,
+              "group": "B"
+            }
+          ]
+        }
+      ],
+      "round1": [
+        {
+          "id": "1-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-1",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-2",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-3",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "round2": [
+        {
+          "id": "2-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "2-1",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "round3": [
+        {
+          "id": "3-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ]
+    },
+    "division2": {
+      "round0": [
+        {
+          "id": "0-0",
+          "teams": [
+            {
+              "name": "Purdue",
+              "seed": 33,
+              "score": 0,
+              "group": "C"
+            },
+            {
+              "name": "Grambling",
+              "seed": 34,
+              "score": 0,
+              "group": "C"
+            }
+          ]
+        },
+        {
+          "id": "0-1",
+          "teams": [
+            {
+              "name": "Utah St",
+              "seed": 35,
+              "score": 0,
+              "group": "C"
+            },
+            {
+              "name": "TCU",
+              "seed": 36,
+              "score": 0,
+              "group": "C"
+            }
+          ]
+        },
+        {
+          "id": "0-2",
+          "teams": [
+            {
+              "name": "Gonzaga",
+              "seed": 37,
+              "score": 0,
+              "group": "C"
+            },
+            {
+              "name": "McNeese St",
+              "seed": 38,
+              "score": 0,
+              "group": "C"
+            }
+          ]
+        },
+        {
+          "id": "0-3",
+          "teams": [
+            {
+              "name": "Kansas",
+              "seed": 39,
+              "score": 0,
+              "group": "C"
+            },
+            {
+              "name": "Samford",
+              "seed": 40,
+              "score": 0,
+              "group": "C"
+            }
+          ]
+        },
+        {
+          "id": "0-4",
+          "teams": [
+            {
+              "name": "South Carolina",
+              "seed": 41,
+              "score": 0,
+              "group": "C"
+            },
+            {
+              "name": "Oregon",
+              "seed": 42,
+              "score": 0,
+              "group": "C"
+            }
+          ]
+        },
+        {
+          "id": "0-5",
+          "teams": [
+            {
+              "name": "Creighton",
+              "seed": 43,
+              "score": 0,
+              "group": "C"
+            },
+            {
+              "name": "Akron",
+              "seed": 44,
+              "score": 0,
+              "group": "C"
+            }
+          ]
+        },
+        {
+          "id": "0-6",
+          "teams": [
+            {
+              "name": "Texas",
+              "seed": 45,
+              "score": 0,
+              "group": "C"
+            },
+            {
+              "name": "Colorado St",
+              "seed": 46,
+              "score": 0,
+              "group": "C"
+            }
+          ]
+        },
+        {
+          "id": "0-7",
+          "teams": [
+            {
+              "name": "Tennessee",
+              "seed": 47,
+              "score": 0,
+              "group": "C"
+            },
+            {
+              "name": "St Peter's",
+              "seed": 48,
+              "score": 0,
+              "group": "C"
+            }
+          ]
+        }
+      ],
+      "round1": [
+        {
+          "id": "1-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-1",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-2",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-3",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "round2": [
+        {
+          "id": "2-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "2-1",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "round3": [
+        {
+          "id": "3-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ]
+    },
+    "division3": {
+      "round0": [
+        {
+          "id": "0-0",
+          "teams": [
+            {
+              "name": "Houston",
+              "seed": 49,
+              "score": 0,
+              "group": "D"
+            },
+            {
+              "name": "Longwood",
+              "seed": 50,
+              "score": 0,
+              "group": "D"
+            }
+          ]
+        },
+        {
+          "id": "0-1",
+          "teams": [
+            {
+              "name": "Nebraska",
+              "seed": 51,
+              "score": 0,
+              "group": "D"
+            },
+            {
+              "name": "Texas A&M",
+              "seed": 52,
+              "score": 0,
+              "group": "D"
+            }
+          ]
+        },
+        {
+          "id": "0-2",
+          "teams": [
+            {
+              "name": "Wisconsin",
+              "seed": 53,
+              "score": 0,
+              "group": "D"
+            },
+            {
+              "name": "James Madison",
+              "seed": 54,
+              "score": 0,
+              "group": "D"
+            }
+          ]
+        },
+        {
+          "id": "0-3",
+          "teams": [
+            {
+              "name": "Duke",
+              "seed": 55,
+              "score": 0,
+              "group": "D"
+            },
+            {
+              "name": "Vermont",
+              "seed": 56,
+              "score": 0,
+              "group": "D"
+            }
+          ]
+        },
+        {
+          "id": "0-4",
+          "teams": [
+            {
+              "name": "Texas Tech",
+              "seed": 57,
+              "score": 0,
+              "group": "D"
+            },
+            {
+              "name": "NC State",
+              "seed": 58,
+              "score": 0,
+              "group": "D"
+            }
+          ]
+        },
+        {
+          "id": "0-5",
+          "teams": [
+            {
+              "name": "Kentucky",
+              "seed": 59,
+              "score": 0,
+              "group": "D"
+            },
+            {
+              "name": "Oakland",
+              "seed": 60,
+              "score": 0,
+              "group": "D"
+            }
+          ]
+        },
+        {
+          "id": "0-6",
+          "teams": [
+            {
+              "name": "Marquette",
+              "seed": 61,
+              "score": 0,
+              "group": "D"
+            },
+            {
+              "name": "WKU",
+              "seed": 62,
+              "score": 0,
+              "group": "D"
+            }
+          ]
+        },
+        {
+          "id": "0-7",
+          "teams": [
+            {
+              "name": "Florida",
+              "seed": 63,
+              "score": 0,
+              "group": "D"
+            },
+            {
+              "name": "Colorado",
+              "seed": 64,
+              "score": 0,
+              "group": "D"
+            }
+          ]
+        }
+      ],
+      "round1": [
+        {
+          "id": "1-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-1",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-2",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "1-3",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "round2": [
+        {
+          "id": "2-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "2-1",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "round3": [
+        {
+          "id": "3-0",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ]
+    },
+    "finals": {
+      "semifinals": [
+        {
+          "id": "sf-1",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "id": "sf-2",
+          "teams": [
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            },
+            {
+              "name": "",
+              "seed": null,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "championship": {
+        "id": "final",
+        "teams": [
+          {
+            "name": "",
+            "seed": null,
+            "score": 0
+          },
+          {
+            "name": "",
+            "seed": null,
+            "score": 0
+          }
+        ]
+      }
+    }
+  }

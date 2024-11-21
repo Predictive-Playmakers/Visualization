@@ -9,7 +9,7 @@ import BracketConnector from "./BracketConnector";
 
 const TOTAL_TEAMS = 16;
 
-const BracketGroup = ({ side = "left", data, divisionId, activeTeam }) => {
+const BracketGroup = ({ side = "left", data, divisionId, activeTeam, shapData , isPredicted, hoveredMatch, onHoverStart, onHoverEnd}) => {
   const { width, height } = calculateBracketDimensions(TOTAL_TEAMS);
 
   const roundsArray = Object.entries(data)
@@ -81,6 +81,17 @@ const BracketGroup = ({ side = "left", data, divisionId, activeTeam }) => {
                   divisionId={divisionId}
                   matchIndex={matchIndex}
                   activeTeam={activeTeam}
+                  shapData={shapData}
+                  isPredicted={isPredicted}
+                  hoveredMatch={hoveredMatch}
+                  onHoverStart={(data) => {
+                    console.log("BracketGroup -> onHoverStart:", shapData);
+                    onHoverStart(data); // Call the passed-down handler
+                  }}
+                  onHoverEnd={() => {
+                    console.log("BracketGroup -> onHoverEnd");
+                    onHoverEnd(); // Call the passed-down handler
+                  }}
                 />
               </div>
             );
