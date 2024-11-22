@@ -65,7 +65,6 @@ const BracketGroup = ({ side = "left", data, divisionId, activeTeam, shapData , 
               TOTAL_TEAMS,
               side,
             );
-
             return (
               <div
                 key={match.id || `${roundData.round}-${matchIndex}`}
@@ -83,7 +82,8 @@ const BracketGroup = ({ side = "left", data, divisionId, activeTeam, shapData , 
                   matchIndex={matchIndex}
                   activeTeam={activeTeam}
                   shapData={shapData}
-                  isPredicted={isPredicted}                 
+                  isPredicted={isPredicted} 
+                  data={data}                
                 />
               </div>
             );

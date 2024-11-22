@@ -12,20 +12,34 @@ import { calculateBracketDimensions } from "./utils/bracketCalculations";
 import { generateDummyBracket, predictWinner } from "./utils";
 import startingBracketData from './utils/startingData.json';
 import ClipLoader from "react-spinners/ClipLoader";
-
+import MoonLoader from "react-spinners/ClipLoader";
 
 const TournamentLayout = () => {
+  
+  // state
   const [bracketData, setBracketData] = useState(startingBracketData);
+  const [progress, setProgress] = useState(0); // Initial progress is 0%
+
   const [activeTeam, setActiveTeam] = useState(null);
   const [isPredicted, setIsPredicted] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false)
-  let [color, setColor] = useState("#ffffff")
+  const [color, setColor] = useState("#ffffff")
+
+
+  // variables
   const dimensions = calculateBracketDimensions(16);
   const bracketWidth = dimensions.width / 2 + 50;
   const bracketHeight = dimensions.height - 50;
 
+  useEffect(() => {
+    // Simulate loading progress for demonstration
+    const interval = setInterval(() => {
+      setProgress((prev) => (prev < 100 ? prev + 10 : 100)); // Increment progress
+    }, 500); // Update every 500ms
 
+    return () => clearInterval(interval); // Clean up the interval
+  }, []);
 
   const override = {
     display: "block",
@@ -278,16 +292,12 @@ const TournamentLayout = () => {
 
       <div className="">
         {isLoading ? ( // Render spinner or default text when loading
-          <div className="sweet-loading">
-          <ClipLoader
-            color={color}
-            loading={isLoading}
-            cssOverride={override}
-            size={150}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        </div>
+           <div className="flex flex-col items-center justify-center min-h-screen">
+           <MoonLoader size={100} color={"#123abc"} loading={true} />
+           <p className="mt-4 text-lg font-semibold text-gray-600">
+             Loading... {progress}%
+           </p>
+         </div>
         ) : error ? ( // Show error message if there is one
           
           <div className="flex flex-col items-center justify-center min-h-[500px]">
@@ -310,7 +320,7 @@ const TournamentLayout = () => {
                   width: '800px',
                 }}
               >
-                <FinalMatches data={bracketData.finals} />
+                <FinalMatches data={bracketData.finals} isPredicted={isPredicted} />
               </div>
               <div
                 className="min-h-[2500px]"
@@ -318,8 +328,9 @@ const TournamentLayout = () => {
                   width: bracketWidth * 2 + 300,
                 }}
               >
-                {brackets.map((bracket) => (
-                  <div
+                {brackets.map((bracket) => {
+                  console.log("bracket", bracket)
+                  return (<div
                     key={bracket.id}
                     className="absolute"
                     style={{
@@ -335,8 +346,14 @@ const TournamentLayout = () => {
                       shapData={dummyShapData}
                       isPredicted={isPredicted}
                     />
-                  </div>
-                ))}
+                  </div>)
+                })
+
+                 
+                  
+                })
+
+
               </div>
             </main>
             <DragOverlay dropAnimation={null}>
