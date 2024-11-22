@@ -1,4 +1,6 @@
 export const predictWinner = (brackets) => {
+
+
   const generateScores = (winner) => {
     // Generate a random score for the winner between 60 and 100
     const winnerScore = Math.floor(Math.random() * 41) + 60;

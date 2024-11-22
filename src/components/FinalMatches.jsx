@@ -67,7 +67,7 @@ const FinalMatches = ({ data }) => {
 
       <div className="absolute left-1/2 -translate-x-1/2 top-24 scale-[110%]">
         <MatchBox
-          title="Final"
+          title="Championship"
           teams={data.championship.teams}
           isCenter={true}
         />

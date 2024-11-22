@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Trophy, Sparkles as Wand, RotateCcw, ChartNoAxesCombined   } from "lucide-react";
+import { useState, useEffect, CSSProperties  } from "react";
+import { Trophy, Sparkles as Wand, RotateCcw, ChartNoAxesCombined , Ban  } from "lucide-react";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import Plot from "react-plotly.js";
@@ -11,16 +11,59 @@ import TeamPreview from "@/components/TeamPreview";
 import { calculateBracketDimensions } from "./utils/bracketCalculations";
 import { generateDummyBracket, predictWinner } from "./utils";
 import startingBracketData from './utils/startingData.json';
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 const TournamentLayout = () => {
   const [bracketData, setBracketData] = useState(startingBracketData);
+  const [activeTeam, setActiveTeam] = useState(null);
+  const [isPredicted, setIsPredicted] = useState(false);
+  const [error, setError] = useState(null);
+  const [isLoading, setLoading] = useState(false)
+  let [color, setColor] = useState("#ffffff")
   const dimensions = calculateBracketDimensions(16);
   const bracketWidth = dimensions.width / 2 + 50;
   const bracketHeight = dimensions.height - 50;
 
-  const [activeTeam, setActiveTeam] = useState(null);
-  const [isPredicted, setIsPredicted] = useState(false);
+
+
+  const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "green",
+  };
+
+
+  const sanitizeBrackets = (brackets) => {
+    return JSON.parse(JSON.stringify(brackets));
+  };
+
+  const retrievePredictions = async (brackets) => {
+    const endpoint = 'https://predict-bracket-198844576431.us-east4.run.app';
+    console.log("brackets line 43:", brackets)
+    const sanitizedBrackets = sanitizeBrackets(brackets);
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ starting_bracket: sanitizedBrackets }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      
+      const updatedBrackets = await response.json();
+      return updatedBrackets.results;
+      
+    } catch (error) {
+      console.error('Error predicting winner:', error);
+      throw error;
+    }
+  };
 
   const dummyShapData = {
     featureNames: ["sex", "age", "Pclass", "SibSp", "Parch"],
@@ -131,12 +174,25 @@ const TournamentLayout = () => {
 
   const handleBracketReset = () => {
     setIsPredicted(false);
+    setError(null);
+    setLoading(false);
     setBracketData(startingBracketData)
   };
 
-  const handlePredictWinner = () => {
-    setIsPredicted(true);
-    setBracketData(predictWinner(bracketData));
+  const handlePredictWinner = async (brackets) => {
+    setLoading(true); // Start loading spinner
+    setError(null); // Clear any previous errors
+    
+    try {
+      const results = await retrievePredictions(brackets);
+      setBracketData(results); // Update state with the returned data
+      setIsPredicted(true)
+    } catch (err) {
+      console.error('Prediction error:', err);
+      setError(err.message); // Display error message if needed
+    } finally {
+      setLoading(false); // End loading spinner
+    }
   };
 
   const viewportWidth = Math.max(1440, window.innerWidth);
@@ -209,7 +265,7 @@ const TournamentLayout = () => {
                 </Dialog>
               )}
               <button
-                onClick={handlePredictWinner}
+                onClick={() => handlePredictWinner(bracketData)}
                 className="flex items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-500"
               >
                 <Wand className="w-4 h-4 text-white mr-1.5" />
@@ -221,52 +277,73 @@ const TournamentLayout = () => {
       </header>
 
       <div className="">
-        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-          <main className="relative w-full overflow-y-hidden overflow-x-auto bg-gray-50 pt-16"style={{
-    overflow: "visible", // Allow hover box to appear outside
-    position: "relative", // Ensure stacking context for z-index
-  }}>
-            <div
-              className="absolute transform -translate-x-1/2 left-1/2"
+        {isLoading ? ( // Render spinner or default text when loading
+          <div className="sweet-loading">
+          <ClipLoader
+            color={color}
+            loading={isLoading}
+            cssOverride={override}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+        ) : error ? ( // Show error message if there is one
+          
+          <div className="flex flex-col items-center justify-center min-h-[500px]">
+            <Ban >error </Ban>
+            <p className="text-red-500 text-lg">{error}</p>
+          </div>
+        ) : (
+          <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+            <main
+              className="relative w-full overflow-y-hidden overflow-x-auto bg-gray-50 pt-16"
               style={{
-                top: isLaptop ? bracketHeight - 58 : bracketHeight - 100,
-                width: "800px",
+                overflow: 'visible', // Allow hover box to appear outside
+                position: 'relative', // Ensure stacking context for z-index
               }}
             >
-              <FinalMatches data={bracketData.finals} />
-            </div>
-            <div
-              className="min-h-[2500px]"
-              style={{
-                width: bracketWidth * 2 + 300,
-              }}
-            >
-              {brackets.map((bracket) => (
-                <div
-                  key={bracket.id}
-                  className="absolute"
-                  style={{
-                    left: bracket.xOffset,
-                    top: bracket.yOffset || 0,
-                  }}
-                >
-                  <BracketGroup
-                    side={bracket.side}
-                    data={bracket.data}
-                    divisionId={bracket.divisionId}
-                    activeTeam={activeTeam}
-                    shapData={dummyShapData}
-                    isPredicted={isPredicted}
-
-                  />
-                </div>
-              ))}
-            </div>
-          </main>
-          <DragOverlay dropAnimation={null}>
-            {activeTeam && <TeamPreview team={activeTeam} />}
-          </DragOverlay>
-        </DndContext>
+              <div
+                className="absolute transform -translate-x-1/2 left-1/2"
+                style={{
+                  top: isLaptop ? bracketHeight - 58 : bracketHeight - 100,
+                  width: '800px',
+                }}
+              >
+                <FinalMatches data={bracketData.finals} />
+              </div>
+              <div
+                className="min-h-[2500px]"
+                style={{
+                  width: bracketWidth * 2 + 300,
+                }}
+              >
+                {brackets.map((bracket) => (
+                  <div
+                    key={bracket.id}
+                    className="absolute"
+                    style={{
+                      left: bracket.xOffset,
+                      top: bracket.yOffset || 0,
+                    }}
+                  >
+                    <BracketGroup
+                      side={bracket.side}
+                      data={bracket.data}
+                      divisionId={bracket.divisionId}
+                      activeTeam={activeTeam}
+                      shapData={dummyShapData}
+                      isPredicted={isPredicted}
+                    />
+                  </div>
+                ))}
+              </div>
+            </main>
+            <DragOverlay dropAnimation={null}>
+              {activeTeam && <TeamPreview team={activeTeam} />}
+            </DragOverlay>
+          </DndContext>
+        )}
       </div>
     </div>
   );

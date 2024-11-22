@@ -9,7 +9,7 @@ import BracketConnector from "./BracketConnector";
 
 const TOTAL_TEAMS = 16;
 
-const BracketGroup = ({ side = "left", data, divisionId, activeTeam, shapData , isPredicted, hoveredMatch, onHoverStart, onHoverEnd}) => {
+const BracketGroup = ({ side = "left", data, divisionId, activeTeam, shapData , isPredicted}) => {
   const { width, height } = calculateBracketDimensions(TOTAL_TEAMS);
 
   const roundsArray = Object.entries(data)
@@ -21,11 +21,12 @@ const BracketGroup = ({ side = "left", data, divisionId, activeTeam, shapData , 
     .sort((a, b) => a.round - b.round);
 
   return (
-    <div className="relative">
+    <div className="relative z-[1]">
       <svg
         className="absolute top-0 left-0 pointer-events-none"
         width={width}
         height={height}
+        
       >
         {roundsArray.slice(0, -1).map((roundData, round) =>
           roundData.matches.map((match, matchIndex) => {
@@ -82,16 +83,7 @@ const BracketGroup = ({ side = "left", data, divisionId, activeTeam, shapData , 
                   matchIndex={matchIndex}
                   activeTeam={activeTeam}
                   shapData={shapData}
-                  isPredicted={isPredicted}
-                  hoveredMatch={hoveredMatch}
-                  onHoverStart={(data) => {
-                    console.log("BracketGroup -> onHoverStart:", shapData);
-                    onHoverStart(data); // Call the passed-down handler
-                  }}
-                  onHoverEnd={() => {
-                    console.log("BracketGroup -> onHoverEnd");
-                    onHoverEnd(); // Call the passed-down handler
-                  }}
+                  isPredicted={isPredicted}                 
                 />
               </div>
             );
