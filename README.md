@@ -50,8 +50,8 @@ A drag-and-drop-enabled component for previewing and arranging teams within the 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo-url.git
-   cd your-project-directory
+   git clone https://github.com/Predictive-Playmakers/Visualization.git 
+   cd Visualization 
 
 2. Install dependencies:
    ```bash
