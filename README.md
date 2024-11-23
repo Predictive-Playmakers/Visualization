@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# Bracket Visualization Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project provides a dynamic and interactive application for visualizing sports brackets, predicting match outcomes, and analyzing match statistics using SHAP visualizations.
 
-Currently, two official plugins are available:
+## View Live
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Check out the live application deployed on Netlify:
 
-## Expanding the ESLint configuration
+[Bracket Visualization Application](https://genuine-dolphin-0ec97a.netlify.app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- **Bracket Display**: Render sports brackets with interactive components.
+- **Match Prediction**: Display predicted outcomes for matches with visualized SHAP contributions.
+- **Team Preview**: Drag-and-drop enabled team cards for better user interactivity.
+- **Statistics Modal**: View detailed match statistics with SHAP-based feature importance visualizations.
+- **Responsive Design**: Adapts to various screen sizes for optimal user experience.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Components Overview
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 1. `App.jsx`
+The main application entry point that initializes and integrates all components.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### 2. `BracketConnector.jsx`
+Handles the visual connections between different rounds in the bracket.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### 3. `BracketGroup.jsx`
+Manages groups of matches within the same bracket level.
+
+### 4. `BracketMatch.jsx`
+Renders individual match details, including teams, statistics, and interactive features like SHAP visualizations.
+
+### 5. `FinalMatches.jsx`
+Displays the final rounds, including the championship match and semifinals, with responsive and interactive visuals.
+
+### 6. `StatisticsModal.jsx`
+A modal component for detailed SHAP visualizations. Fetches and displays SHAP data related to matches for better insights.
+
+### 7. `TeamPreview.jsx`
+A drag-and-drop-enabled component for previewing and arranging teams within the bracket.
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js**: Ensure Node.js is installed on your system.
+- **React**: The application is built with React and assumes familiarity with it.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo-url.git
+   cd your-project-directory
+
+2. Install dependencies:
+   ```bash
+   npm install
+
+
+3. Start the development server:
+   ```bash
+   npm start
