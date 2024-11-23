@@ -13,10 +13,10 @@ import { generateDummyBracket, predictWinner } from "./utils";
 import startingBracketData from './utils/startingData.json';
 import ClipLoader from "react-spinners/ClipLoader";
 import MoonLoader from "react-spinners/ClipLoader";
+import { BarLoader } from "react-spinners";
 
 const TournamentLayout = () => {
   
-  // state
   const [bracketData, setBracketData] = useState(startingBracketData);
   const [progress, setProgress] = useState(0); // Initial progress is 0%
 
@@ -27,17 +27,95 @@ const TournamentLayout = () => {
   const [color, setColor] = useState("#ffffff")
 
 
+  if (!isPredicted) {
+
+    console.log("initial bracket data:" ,bracketData)
+
+  }
+
+  const correctSeeds = {
+    1: 1, 2: 16, 3: 8, 4: 9, 5:5, 6: 12, 7:4, 8:13, 9:6, 10:11, 11:3, 12:14, 13:7, 14:10, 15:2, 16:15,
+    17: 1, 18:16, 19: 8, 20:9, 21:5, 22: 12, 23:4, 24:13, 25:6, 26:11, 27:3, 28:14, 29:7, 30:10, 31:2, 32:15,
+    33: 1, 34:16, 35: 8, 36:9, 37:5, 38: 12, 39:4, 40:13, 41:6, 42:11, 43:3, 44:14, 45:7, 46:10, 47:2, 48:15,
+    49: 1, 50:16, 51: 8, 52:9, 53:5, 54: 12, 55:4, 56:13, 57:6, 58:11, 59:3, 60:14, 61:7, 62:10, 63:2, 64:15,
+  }
+
+  const swapSeedsStartingBracket = (bracket, correctSeeds) => {
+    for (let divisionKey in bracket) {
+      const division = bracket[divisionKey];
+  
+      for (let roundKey in division) {
+        const round = division[roundKey];
+  
+        // Handle rounds that are arrays (e.g., "round0", "round1", etc.)
+        if (Array.isArray(round)) {
+          round.forEach(match => {
+            // Iterate over each team in the match
+            match.teams.forEach(team => {
+              if (team.seed !== null && team.seed !== undefined) {
+                const newSeed = correctSeeds[team.seed];
+                if (newSeed !== undefined) {
+                  team.seed = newSeed;
+                }
+              }
+            });
+          });
+        } else if (typeof round === 'object' && round !== null) {
+          // Handle cases where the round is an object (e.g., "championship")
+          const match = round;
+          match.teams.forEach(team => {
+            if (team.seed !== null && team.seed !== undefined) {
+              const newSeed = correctSeeds[team.seed];
+              if (newSeed !== undefined) {
+                team.seed = newSeed;
+              }
+            }
+          });
+        }
+      }
+    }
+    
+    console.log("bracket after seed swap before sending request", bracket)
+    return bracket;
+  }
+
+
+  const swapSeedsPredictedBracket =(data, correctSeeds) => {
+    for (const division in data.results) {
+      for (const round in data.results[division]) {
+        data.results[division][round].forEach((match) => {
+          // Swap seeds for Team A and Team B
+          match.teams.forEach((team) => {
+            if (team.seed in correctSeeds) {
+              team.seed = correctSeeds[team.seed];
+            }
+          });
+        });
+      }
+    }
+    console.log("bracket after seed swap before sending request", data)
+    return data;
+
+
+  }
+
   // variables
   const dimensions = calculateBracketDimensions(16);
   const bracketWidth = dimensions.width / 2 + 50;
   const bracketHeight = dimensions.height - 50;
 
   useEffect(() => {
-    // Simulate loading progress for demonstration
+    const totalTime = 10000; // total expected time in milliseconds (10 seconds)
+    const updateInterval = 100; // update progress every 100ms
+    const increment = 100 / (totalTime / updateInterval); // calculate increment per interval
+  
     const interval = setInterval(() => {
-      setProgress((prev) => (prev < 100 ? prev + 10 : 100)); // Increment progress
-    }, 500); // Update every 500ms
-
+      setProgress((prevProgress) => {
+        const nextProgress = prevProgress + increment;
+        return nextProgress >= 100 ? 99 : nextProgress; // cap progress at 99%
+      });
+    }, updateInterval);
+  
     return () => clearInterval(interval); // Clean up the interval
   }, []);
 
@@ -49,14 +127,16 @@ const TournamentLayout = () => {
 
 
   const sanitizeBrackets = (brackets) => {
-    return JSON.parse(JSON.stringify(brackets));
+    const tempBrackets = isPredicted ? swapSeedsPredictedBracket(brackets, correctSeeds) : swapSeedsStartingBracket(brackets, correctSeeds) 
+    return JSON.parse(JSON.stringify(tempBrackets));
   };
 
   const retrievePredictions = async (brackets) => {
     const endpoint = 'https://predict-bracket-198844576431.us-east4.run.app';
     console.log("brackets line 43:", brackets)
-    const sanitizedBrackets = sanitizeBrackets(brackets);
 
+    const sanitizedBrackets = sanitizeBrackets(brackets);
+    console.log("sanitizedBrackets", sanitizedBrackets)
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -268,16 +348,7 @@ const TournamentLayout = () => {
                 <RotateCcw className="w-4 h-4 text-white mr-1.5" />
                 Reset Brackets
               </button>
-              {isPredicted && (
-                <Dialog>
-                  <DialogTrigger>
-                    <button className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                      Show statistics
-                    </button>
-                  </DialogTrigger>
-                  <StatisticsModal />
-                </Dialog>
-              )}
+             
               <button
                 onClick={() => handlePredictWinner(bracketData)}
                 className="flex items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-500"
@@ -295,7 +366,7 @@ const TournamentLayout = () => {
            <div className="flex flex-col items-center justify-center min-h-screen">
            <MoonLoader size={100} color={"#123abc"} loading={true} />
            <p className="mt-4 text-lg font-semibold text-gray-600">
-             Loading... {progress}%
+             Fetching Data From Model... {progress}%
            </p>
          </div>
         ) : error ? ( // Show error message if there is one
@@ -347,13 +418,8 @@ const TournamentLayout = () => {
                       isPredicted={isPredicted}
                     />
                   </div>)
+                })                  
                 })
-
-                 
-                  
-                })
-
-
               </div>
             </main>
             <DragOverlay dropAnimation={null}>

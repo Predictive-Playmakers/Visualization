@@ -105,27 +105,33 @@ const BracketMatch = ({ match, roundNumber, divisionId, activeTeam, shapData, is
         left: hoverPosition.left,
         transform: "translateX(-50%)",
         width: "500px",
+        maxHeight: '80vh', // Optional: prevent the container from exceeding viewport height
+        overflowY: 'auto', // Enable scrolling if content exceeds maxHeight
         zIndex: 1000,
         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
         border: "2px solid lightgray", // Optional, more noticeable border
       }}
     >
-      <Plot data={plotData.data} layout={plotData.layout} style={{ width: "100%", height: "400px" }} />
+       {/* Winner */}
+    <div className="mt-5 text-center border-t pt-3 flex flex-col items-center">
+    <span className="font-semibold text-lg text-gray-800">Winner:</span>
+    <div className="font-extrabold text-2xl text-indigo-700 mt-2">
+      {Winner}
+    </div>
 
-      {/* Statistics Section */}
-<div className="mt-4 text-sm">
+    {/* Statistics Section */}
+    <div className="mt-4 text-sm">
   <h3 className="font-semibold text-gray-800 mb-3 text-center">Match Statistics</h3>
   <div className="grid grid-cols-2 gap-4 text-gray-700">
     {/* Team Names */}
-    <div className="col-span-2 flex justify-between items-center border-b pb-2">
-      <span className="font-semibold">Team A:</span>
-      <span className="text-gray-900">{TeamA}</span>
-    </div>
-    <div className="col-span-2 flex justify-between items-center border-b pb-2">
-      <span className="font-semibold">Team B:</span>
-      <span className="text-gray-900">{TeamB}</span>
-    </div>
-
+    <div className="col-span-2 flex flex-wrap justify-between items-center border-b pb-2">
+  <span className="font-semibold">Team A:</span>
+  <span className="text-gray-900 break-words">{TeamA}</span>
+</div>
+<div className="col-span-2 flex flex-wrap justify-between items-center border-b pb-2">
+  <span className="font-semibold">Team B:</span>
+  <span className="text-gray-900 break-words">{TeamB}</span>
+</div>
     {/* Statistics for Team A */}
     <div className="flex justify-between items-center">
       <span>Avg Points:</span>
@@ -152,15 +158,11 @@ const BracketMatch = ({ match, roundNumber, divisionId, activeTeam, shapData, is
       <span className="font-medium text-green-500">{TeamB_Efficiency_Rating}</span>
     </div>
 
-    {/* Winner */}
-    <div className="mt-5 text-center border-t pt-3 flex flex-col items-center">
-    <span className="font-semibold text-lg text-gray-800">Winner:</span>
-    <div className="font-extrabold text-2xl text-indigo-700 mt-2">
-      {Winner}
-    </div>
-  </div>
+   
   </div>
 </div>
+  </div>
+      <Plot data={plotData.data} layout={plotData.layout} style={{ width: "100%", height: "400px" }} />
     </div>
   );
 

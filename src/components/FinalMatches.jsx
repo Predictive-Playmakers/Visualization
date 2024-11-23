@@ -18,8 +18,8 @@ const FinalMatches = ({ data, isPredicted, match }) => {
     
       const { MATCH_WIDTH } = getResponsiveDimensions();
       
-
       const handleMouseEnter = (event) => {
+        console.log("match", match)
         setIsHovered(true);
         const rect = event.currentTarget.getBoundingClientRect();
         setHoverPosition({
@@ -41,9 +41,6 @@ const FinalMatches = ({ data, isPredicted, match }) => {
       const correctShapData = shapData ?  shapData.data[0] : null
       if (isPredicted && match){
       
-      
-      console.log("shapData.data[0]", shapData.data[0])
-
       TeamA = match["results"].TeamA;
       TeamB = match["results"].TeamB;
       TeamA_Avg_Points = match["results"]["TeamA_Avg Points Per Game: "];
@@ -53,19 +50,6 @@ const FinalMatches = ({ data, isPredicted, match }) => {
       TeamB_Efficiency_Rating = match["results"]["TeamB_Efficiency Rating: "];
       TeamB_Turnover_Ratio = match["results"]["TeamB_Turnover Ratio: "];
       Winner = match["results"]["Winner"];
-
-      console.log("Team A Stats:");
-      console.log("Avg Points:", TeamA_Avg_Points);
-      console.log("Efficiency Rating:", TeamA_Efficiency_Rating);
-      console.log("Turnover Ratio:", TeamA_Turnover_Ratio);
-      console.log("Team B Stats:");
-      console.log("Avg Points:", TeamB_Avg_Points);
-      console.log("Efficiency Rating:", TeamB_Efficiency_Rating);
-      console.log("Turnover Ratio:", TeamB_Turnover_Ratio);
-      console.log("Winner:", Winner);
-
-
-     
     }
 
     const plotData = isPredicted  && correctShapData
@@ -105,27 +89,33 @@ const FinalMatches = ({ data, isPredicted, match }) => {
             left: hoverPosition.left,
             transform: "translateX(-50%)",
             width: "500px",
+            maxHeight: '80vh', // Optional: prevent the container from exceeding viewport height
+            overflowY: 'auto', // Enable scrolling if content exceeds maxHeight
             zIndex: 1000,
             boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
             border: "2px solid lightgray", // Optional, more noticeable border
           }}
         >
-          <Plot data={plotData.data} layout={plotData.layout} style={{ width: "100%", height: "400px" }} />
+           {/* Winner */}
+        <div className="mt-5 text-center border-t pt-3 flex flex-col items-center">
+        <span className="font-semibold text-lg text-gray-800">Winner:</span>
+        <div className="font-extrabold text-2xl text-indigo-700 mt-2">
+          {Winner}
+        </div>
     
-          {/* Statistics Section */}
-    <div className="mt-4 text-sm">
+        {/* Statistics Section */}
+        <div className="mt-4 text-sm">
       <h3 className="font-semibold text-gray-800 mb-3 text-center">Match Statistics</h3>
       <div className="grid grid-cols-2 gap-4 text-gray-700">
         {/* Team Names */}
-        <div className="col-span-2 flex justify-between items-center border-b pb-2">
-          <span className="font-semibold">Team A:</span>
-          <span className="text-gray-900">{TeamA}</span>
-        </div>
-        <div className="col-span-2 flex justify-between items-center border-b pb-2">
-          <span className="font-semibold">Team B:</span>
-          <span className="text-gray-900">{TeamB}</span>
-        </div>
-    
+        <div className="col-span-2 flex flex-wrap justify-between items-center border-b pb-2">
+      <span className="font-semibold">Team A:</span>
+      <span className="text-gray-900 break-words">{TeamA}</span>
+    </div>
+    <div className="col-span-2 flex flex-wrap justify-between items-center border-b pb-2">
+      <span className="font-semibold">Team B:</span>
+      <span className="text-gray-900 break-words">{TeamB}</span>
+    </div>
         {/* Statistics for Team A */}
         <div className="flex justify-between items-center">
           <span>Avg Points:</span>
@@ -150,22 +140,13 @@ const FinalMatches = ({ data, isPredicted, match }) => {
         <div className="flex justify-between items-center">
           <span>Efficiency Rating:</span>
           <span className="font-medium text-green-500">{TeamB_Efficiency_Rating}</span>
-        </div>
-    
-        {/* Winner */}
-        <div className="mt-5 text-center border-t pt-3 flex flex-col items-center">
-        <span className="font-semibold text-lg text-gray-800">Winner:</span>
-        <div className="font-extrabold text-2xl text-indigo-700 mt-2">
-          {Winner}
-        </div>
-      </div>
+        </div>       
       </div>
     </div>
+      </div>
+          <Plot data={plotData.data} layout={plotData.layout} style={{ width: "100%", height: "400px" }} />
         </div>
       );
-
-
-
 
     return (
       <div className="relative z-[1]" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -173,9 +154,7 @@ const FinalMatches = ({ data, isPredicted, match }) => {
         <div
       className="bg-white rounded-lg shadow-lg border border-gray-200"
       style={{ width: MATCH_WIDTH }}
-    >
-
-      
+    >      
     <div
       className={`bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 transition-all duration-200 hover:shadow-xl ${
         isCenter ? "border-yellow-400 border-2" : ""
